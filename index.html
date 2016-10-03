@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>TicToe</title>
+    <style>
+        #board>div,
+        #turn {
+            border: 1px solid black;
+            width: 50px;
+            height: 50px;
+            margin: 3px;
+            color: #333;
+            float: left;
+            cursor: pointer;
+            font-size: 50px;
+            line-height: 50px;
+            text-align: center;
+        }
+
+        #turn {
+            float: none;
+            color: #ccc;
+        }
+
+        #board:after {
+            display: block;
+            clear: both;
+            content: "";
+        }
+    </style>
+</head>
+
+<body>
+    <p>This JavaScript Tic-Toe game was made using TDD and QUnit as testing framework</p>
+    <input id="size" value="3"><button onclick="generateGrid()">Regenerate</button>
+    <div id="board">
+    </div>
+    <div id="turn">
+    </div>
+    <div id="result">
+    </div>
+    <script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/qunit/qunit-2.0.1.js"></script>
+    <script src="ui.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
