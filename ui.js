@@ -44,7 +44,6 @@ function generateGrid() {
                     $("#result").html("Congratulations, <strong>" + symbols[response.winner] + "</strong> wins!");
                 }
             }
-            console.log(response);
             changeTurn();
         }
     });
