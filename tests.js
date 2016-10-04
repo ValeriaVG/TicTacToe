@@ -1,30 +1,34 @@
-QUnit.test("result check", function(assert) {
+QUnit.module( "result check" );
+QUnit.test("3 x in a row/col/diag", function(assert) {
     assert.deepEqual(checkResult({
         "count": 3,
         "summ": 3
     }, 3), {
         "gameover": true,
         "winner": 1
-    }, "3 x in a row/col/diag");
+    }, "X won");
+
+  });
+QUnit.test("3 o in a row/col/diag", function(assert) {
     assert.deepEqual(checkResult({
         "count": 3,
         "summ": 0
     }, 3), {
         "gameover": true,
         "winner": 0
-    }, "3 o in a row/col/diag");
+    }, "O won");
+  });
+
+  QUnit.test("Game in progress", function(assert) {
     assert.deepEqual(checkResult({
         "count": 1,
         "summ": 0
     }, 3), false, "Nothing special");
-    assert.deepEqual(checkResult({
-        "count": 3,
-        "summ": 2
-    }, 3), false, "Nothing special");
-});
+  });
 
-QUnit.test("someone wins", function(assert) {
-  //Rows
+
+QUnit.module( "someone wins" );
+QUnit.test("X wins in a row", function(assert) {
     assert.deepEqual(checkBoard([
         [1, 1, 1],
         [0, 0, 1],
@@ -33,34 +37,10 @@ QUnit.test("someone wins", function(assert) {
         "gameover": true,
         "winner": 1
     }, "3 X in first row!");
+  });
 
-    assert.deepEqual(checkBoard([
-        [0, 0, 0],
-        [1, 0, 1],
-        [1, 1, 0]
-    ], 3), {
-        "gameover": true,
-        "winner": 0
-    }, "3 O in first row!");
 
-    assert.deepEqual(checkBoard([
-        [0, 0, 1],
-        [1, 1, 1],
-        [0, 1, 0]
-    ], 3), {
-        "gameover": true,
-        "winner": 1
-    }, "3 X in second row!");
-
-    assert.deepEqual(checkBoard([
-        [1, 0, 1],
-        [0, 1, 0],
-        [0, 0, 0]
-    ], 3), {
-        "gameover": true,
-        "winner": 0
-    }, "3 O in last row!");
-//Columns
+QUnit.test("X wins in a column", function(assert) {
     assert.deepEqual(checkBoard([
         [1, 0, 0],
         [1, 0, 1],
@@ -69,35 +49,9 @@ QUnit.test("someone wins", function(assert) {
         "gameover": true,
         "winner": 1
     }, "3 X in first column!");
+  });
 
-    assert.deepEqual(checkBoard([
-        [0, 1, 0],
-        [0, 1, 1],
-        [0, 0, 1]
-    ], 3), {
-        "gameover": true,
-        "winner": 0
-    }, "3 O in first column!");
-
-    assert.deepEqual(checkBoard([
-        [0, 1, 0],
-        [0, 1, 1],
-        [1, 1, 0]
-    ], 3), {
-        "gameover": true,
-        "winner": 1
-    }, "3 X in second column!");
-
-    assert.deepEqual(checkBoard([
-        [1, 0, 0],
-        [0, 1, 0],
-        [1, 1, 0]
-    ], 3), {
-        "gameover": true,
-        "winner": 0
-    }, "3 O in last column!");
-
-
+  QUnit.test("X wins in a left diag", function(assert) {
     assert.deepEqual(checkBoard([
         [1, 0, 0],
         [0, 1, 0],
@@ -105,8 +59,9 @@ QUnit.test("someone wins", function(assert) {
     ], 3), {
         "gameover": true,
         "winner": 1
-    }, "3 x in left someone!");
-
+    }, "3 x in left giag!");
+});
+  QUnit.test("O wins in a right diag", function(assert) {
     assert.deepEqual(checkBoard([
         [1, 0, 0],
         [1, 0, 0],
@@ -114,10 +69,11 @@ QUnit.test("someone wins", function(assert) {
     ], 3), {
         "gameover": true,
         "winner": 0
-    }, "3 o in right someone!");
+    }, "3 o in right diag!");
 
-
-    //5x5
+});
+QUnit.module( "5x5" );
+  QUnit.test("5x5 X wins", function(assert) {
     assert.deepEqual(checkBoard([
         [1, 1, 1 ,1 ,1],
         [0, 0, 1, 0 ,0],
@@ -130,8 +86,8 @@ QUnit.test("someone wins", function(assert) {
     }, "5 X in first row!");
 
 });
-QUnit.test("tic-toe", function(assert) {
-
+QUnit.module( "no winner" );
+QUnit.test("game in process", function(assert) {
     assert.deepEqual(checkBoard([
         [1, 0, 1],
         [undefined, undefined, undefined],
@@ -139,6 +95,8 @@ QUnit.test("tic-toe", function(assert) {
     ], 3), {
         "gameover": false
     }, "Only first row");
+  });
+  QUnit.test("Toe", function(assert) {
 
     assert.deepEqual(checkBoard([
         [1, 0, 1],
